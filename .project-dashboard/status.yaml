@@ -1,0 +1,86 @@
+schema_version: 1
+project:
+  name: 구구 야구단
+  goal: 구구단 정답과 타격 게임의 Android 설치 파일과 검증 자료를 보존한다.
+  phase: 설치 파일 1.4.1 제공 / 실기기 미검증
+  summary: 이 저장소는 소스 개발 공간이 아닌 설치 파일·릴리스 전달 공간이다. 1.4.1 APK가 게시되어 있으며 실제 휴대폰 검증과 원본 소스 기준 연결이 다음 작업이다.
+tasks:
+  - id: source-inventory
+    title: 소스·브랜치·전달 기준 확인
+    order: 10
+    priority: high
+    status: done
+    weight: 1
+    agent: null
+    branch: main
+    depends_on: []
+    checklist:
+      - id: source-reference
+        title: 기본·개발 브랜치와 현재 파일 기준 확인
+        done: true
+      - id: release-reference
+        title: GitHub release 존재 여부와 전달 공간 역할 확인
+        done: true
+    blockers: []
+    handoff:
+      updated_at: 2026-10-12T10:31:53.217Z
+      completed:
+        - 기본·개발 브랜치와 현재 파일 기준 확인
+        - GitHub release 존재 여부와 전달 공간 역할 확인
+      verification:
+        - 2026-10-12 GitHub 브랜치·PR·릴리스 메타데이터 대조
+      stopped_reason: null
+      next_action: null
+      estimated_minutes: null
+    decisions: []
+  - id: published-test-artifact
+    title: 기존 테스트 APK 제공
+    order: 20
+    priority: high
+    status: done
+    weight: 1
+    agent: null
+    branch: null
+    depends_on: []
+    checklist:
+      - id: published-asset
+        title: 최신 게시 APK 자산과 버전 확인
+        done: true
+    blockers: []
+    handoff:
+      updated_at: 2026-10-12T10:31:53.217Z
+      completed:
+        - 최신 게시 APK 자산과 버전 확인
+      verification:
+        - 기존 release v1.4.1; 이번 설치·실행 검사는 수행하지 않음
+      stopped_reason: null
+      next_action: null
+      estimated_minutes: null
+    decisions: []
+  - id: resume-validation
+    title: 다음 실제 사용·재개 검증
+    order: 30
+    priority: high
+    status: queued
+    weight: 1
+    agent: main-agent
+    branch: null
+    depends_on: []
+    checklist:
+      - id: baseline-check
+        title: 기준 버전/격리 환경과 검사 조건 확정
+        done: false
+      - id: runtime-check
+        title: 명시한 미검증 흐름 실행과 결과 기록
+        done: false
+    blockers: []
+    handoff:
+      updated_at: 2026-10-12T10:31:53.217Z
+      completed: []
+      verification:
+        - "기존 release 기록: 단위152·웹E2E12·Android 에뮬레이터12 PASS. 최종 수동 타격 임팩트·전체 경기 완료는 미검증."
+        - GitHub release APK 자산 13454634bytes 및 업로드 digest 존재 확인. APK를 새로 설치하거나 검증하지 않았다.
+      stopped_reason: null
+      next_action: 1.4.1의 원본 소스 위치를 연결하고 실기기 수동 타격·경기 완료·소리/진동 검증 기준을 잡는다.
+      estimated_minutes: null
+    decisions: []
